@@ -18,9 +18,8 @@ export class UserComponent implements OnInit {
     private location: Location
   ) { }
 
+  // object pro pridai nebo editaci
   user: IUser | null = null;
-
-  title = 'Pokus';
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -29,6 +28,7 @@ export class UserComponent implements OnInit {
     });
   }
 
+  //ulozeni nebo editovani zaznamu
   save() {
     if (this.user) {
       this.listService.edit(this.user);
@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
+  //navrat na predchozi stranku
   back() {
     this.location.back();
   }

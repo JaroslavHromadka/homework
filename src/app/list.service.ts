@@ -1,27 +1,46 @@
 import { IUser } from './user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
 
+  // zpusob razeni, 0 - podle id, 1 - podle title sestupne, 2 - podle title vzestupne
   sortType = 0;
 
+  //ulozeni nactenych zaznmu z api
   private dataCache: IUser[] = [];
+
   constructor(private http: HttpClient) { }
 
+  //nacteni zaznamu z api
   load(): Observable<IUser[]> {
     if (this.dataCache.length > 0) {
       return of(this.dataCache);
     }
     else {
-      return this.http.get<IUser[]>('https://jsonplaceholder.typicode.com/todos').pipe(tap(data => this.dataCache = data));
+      return this.http.get<IUser[]>('https://jsonplaceholder.typicode.com/todos').pipe(tap(data => this.dataCache = data)).pipe(
+        catchError(this.handleError));
     }
   }
 
+  private handleError(error: HttpErrorResponse) {
+    console.log('Error', error);
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(() => errorMessage);
+  }
+
+  //ziskani zaznamu podle id, v pripade 0 se jedna o novy zaznam
   get(id: number): Observable<IUser> {
     let user: IUser = {id: 0, userId: 3, title: '', completed: false};
     
@@ -34,6 +53,7 @@ export class ListService {
     return of(user);
   }
 
+  //ulozeni noveho zaznamu nebo oprava existujiciho
   edit(user: IUser) {
     if (user.id === 0) {
       const id = (Math.max(...this.dataCache.map(o => o.id)) ?? 0) + 1;
@@ -48,7 +68,9 @@ export class ListService {
     }
   }
 
+  //smazani zaznamu
   delete(id: number):IUser[] {
-    return this.dataCache.filter(o => o.id !== id);
+    this.dataCache = this.dataCache.filter(o => o.id !== id);
+    return this.dataCache;
   }
 }

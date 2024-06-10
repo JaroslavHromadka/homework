@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UserIdPipe implements PipeTransform {
 
+  //konverze podle userId
   transform(id: number): string {
     switch (id) {
       case 1: return 'admin'; break;

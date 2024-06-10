@@ -10,6 +10,7 @@ import { UserIdPipe } from './user-id.pipe';
 import { SortTitlePipe } from './sort-title.pipe';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     ListComponent,
     UserIdPipe,
     SortTitlePipe,
-    UserComponent
+    UserComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,

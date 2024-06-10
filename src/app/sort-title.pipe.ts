@@ -6,6 +6,7 @@ import { IUser } from './user';
 })
 export class SortTitlePipe implements PipeTransform {
 
+  //razeni podle typu
   transform(array: IUser[], sortType: number = 0): any[] {
     if (!Array.isArray(array)) {
       return array;
