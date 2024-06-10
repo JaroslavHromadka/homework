@@ -1,0 +1,22 @@
+<div *ngIf="user">
+    <form #userForm="ngForm" (ngSubmit)="save()" autocomplete="off" novalidate>
+        <div class="mb-3 mt-3" [ngClass]="{'error': titleControl.invalid && titleControl.touched}">
+            <label for="title">Title:</label>
+            <em *ngIf="titleControl?.invalid && (titleControl?.touched)">Required</em>
+            <input type="text" class="form-control" required id="title" placeholder="Enter title" name="title" [(ngModel)]="user.title" #titleControl="ngModel">
+        </div>
+        <div class="mb-3" [ngClass]="{'error': userIdControl.invalid && userIdControl.touched}">
+            <label for="userId">User:</label>
+            <em *ngIf="userIdControl?.invalid && (userIdControl?.touched)">Required (1-10)</em>
+            <input type="number" class="form-control" required id="userId" placeholder="Enter user type" name="userId" min="1"
+                max="10" [(ngModel)]="user.userId" #userIdControl="ngModel">
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="completed" [(ngModel)]="user.completed"> Completed
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+        <button type="submit" class="btn btn-secondary" (click)="back()">Back</button>
+    </form>
+</div>

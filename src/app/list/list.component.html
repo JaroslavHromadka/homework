@@ -1,0 +1,32 @@
+<div class="table-container">
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th (click)="changeSort()" style="position: relative;">
+                    Title
+                    <content class="sorted" style="position: absolute; right: 0;">
+                        <i class="bi bi-sort-numeric-down" *ngIf="listService.sortType === 0"></i>
+                        <i class="bi bi-sort-alpha-down" *ngIf="listService.sortType === 1"></i>
+                        <i class="bi bi-sort-alpha-down-alt" *ngIf="listService.sortType === 2"></i>
+                    </content>
+                </th>
+                <th>User</th>
+                <th class="content-center">Completed</th>
+                <th class="content-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of data | sortTitle: listService.sortType">
+                <td class="content-center">{{user.id}}</td>
+                <td>{{user.title}}</td>
+                <td>{{user.userId | userId}}</td>
+                <td class="content-center"><i class="bi bi-check-circle-fill" *ngIf="user.completed"></i></td>
+                <td class="content-center">
+                    <button class="btn btn-success btn-sm" [routerLink]="['/edit', user.id]" >Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="delete(user.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

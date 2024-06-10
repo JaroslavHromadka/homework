@@ -1,0 +1,46 @@
+.sorted {
+    margin-right: 20px;
+}
+
+.bi-check-circle-fill {
+    color: green;
+}
+
+.content-center {
+    text-align: center;
+}
+
+.table-container {
+    height: 75vh;
+    /* Set the height as needed */
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    text-align      : center;
+    position        : sticky;
+    top             : 0;
+    background-color: #f8f9fa;
+    /* Customize the header background color */
+    z-index         : 1;
+    /* Ensure the header stays above the body content */
+}
+
+table,
+th,
+td {
+    border         : 1px solid black;
+    border-collapse: collapse;
+}
+
+td {
+    padding-left: 10px;
+}
+
+button {
+    margin-right: 5px;
+}
