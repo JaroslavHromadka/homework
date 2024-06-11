@@ -11,6 +11,8 @@ import { SortTitlePipe } from './sort-title.pipe';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
 import { DocumentationComponent } from './documentation/documentation.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { DocumentationComponent } from './documentation/documentation.component'
     UserIdPipe,
     SortTitlePipe,
     UserComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,9 @@ import { DocumentationComponent } from './documentation/documentation.component'
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

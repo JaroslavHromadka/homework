@@ -26,7 +26,7 @@
                 <td class="content-center"><i class="bi bi-check-circle-fill" *ngIf="user.completed"></i></td>
                 <td class="content-center">
                     <button class="btn btn-success btn-sm" [routerLink]="['/edit', user.id]">Edit</button>
-                    <button class="btn btn-danger btn-sm" (click)="delete(user.id)">Delete</button>
+                    <button class="btn btn-danger btn-sm" (click)="delete(user.id, user.title)">Delete</button>
                 </td>
             </tr>
         </tbody>

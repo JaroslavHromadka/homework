@@ -13,7 +13,7 @@
     .navbar,
     .navbar-left,
     .navbar-right {
-        display        : flex;
+        display       : flex;
         flex-direction: column;
     }
 

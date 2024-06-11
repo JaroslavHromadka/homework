@@ -11,8 +11,7 @@
 }
 
 .table-container {
-    height: 75vh;
-    /* Set the height as needed */
+    height    : 75vh;
     overflow-y: auto;
 }
 
@@ -25,9 +24,8 @@ thead {
     position        : sticky;
     top             : 0;
     background-color: #f8f9fa;
-    /* Customize the header background color */
     z-index         : 1;
-    /* Ensure the header stays above the body content */
+    height          : 40px;
 }
 
 table,

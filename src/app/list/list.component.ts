@@ -1,6 +1,8 @@
 import { IUser } from './../user';
 import { ListService } from './../list.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
 
 @Component({
@@ -14,7 +16,10 @@ export class ListComponent implements OnInit {
   data: IUser[] = [];
   error: any = null;
 
-  constructor(public listService: ListService) { }
+  constructor(
+    public listService: ListService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.listService.load().subscribe(
@@ -33,7 +38,14 @@ export class ListComponent implements OnInit {
 
   //smazani zaznamu
   //id - idecko zaznamu
-  delete(id: number) {
-    this.data = this.listService.delete(id);
+  //title - jmeno uzivatele
+  delete(id: number, title: string) {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, { data: `${id} - ${title}` });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.data = this.listService.delete(id);
+      }
+    });
+
   }
 }
